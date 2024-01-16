@@ -13,20 +13,25 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        yield prisma.user.create({
+        yield prisma.post.create({
             data: {
-                email: "omnigam2@gmail.com",
-                name: "Om2",
+                title: "How to learn Prisma",
+                content: "By doing Practice thoroughly",
+                author: {
+                    connect: {
+                        id: 1,
+                    },
+                },
             },
         });
     });
 }
 main()
     .then(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield prisma.$disconnect(); //once the query is done it disconnects from the database as its a good practice to dissconnects once the task is done
+    yield prisma.$disconnect();
 }))
     .catch((e) => __awaiter(void 0, void 0, void 0, function* () {
-    console.error(e);
+    console.log(e);
     yield prisma.$disconnect();
     process.exit(1);
 }));
