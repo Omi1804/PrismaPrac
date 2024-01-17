@@ -11,19 +11,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
+//here we symultaneously create the user as well as create the post
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        yield prisma.post.create({
+        yield prisma.user.create({
             data: {
-                title: "How to learn Prisma",
-                content: "By doing Practice thoroughly",
-                author: {
-                    //this is how i setting up the relation with user's table
-                    connect: {
-                        id: 1,
-                    },
+                email: "omnigam3@gmail.com",
+                name: "Om Nigam",
+                posts: {
+                    create: [
+                        {
+                            title: "how to learn HTML",
+                            content: "Learning HTML by doing it yourself",
+                        },
+                        {
+                            title: "how to learn CSS",
+                            content: "Learning CSS by doing it yourself",
+                        },
+                    ],
                 },
-                // you can also do this whole author thingy as : authorId : 1
             },
         });
     });
