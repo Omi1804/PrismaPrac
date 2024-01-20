@@ -13,19 +13,14 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        //   const posts = await prisma.post.findMany({}); ---> in this you'll get all the posts it the database
-        const posts = yield prisma.post.findMany({
-            include: {
-                author: {
-                    select: {
-                        // in this you'll get all the posts along with the post's username and email
-                        name: true,
-                        email: true,
-                    },
-                },
+        yield prisma.user.update({
+            where: {
+                id: 1,
+            },
+            data: {
+                name: "Om Narayan Nigam",
             },
         });
-        console.log(posts);
     });
 }
 main()
